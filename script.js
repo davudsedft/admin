@@ -2,7 +2,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
     event.preventDefault();
     
     const text = document.getElementById('textInput').value;
-    const response = await fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/contents/textfile.txt', {
+    const response = await fetch('https://api.github.com/repos/davudsedft/admin/contents/textfile.txt', {
         method: 'PUT',
         headers: {
             'Authorization': 'token YOUR_GITHUB_TOKEN',
