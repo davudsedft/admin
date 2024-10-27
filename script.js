@@ -8,7 +8,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
         const response = await fetch('https://api.github.com/repos/davudsedft/admin/contents/textfile.txt', {
             method: 'PUT', // مطمئن شو که متد درخواست به درستی تعریف شده
             headers: {
-                'Authorization': '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', // اضافه کردن 'token ' قبل از توکن
+                'Authorization': 'token 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', // اضافه کردن 'token ' قبل از توکن
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
