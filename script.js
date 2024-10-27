@@ -6,7 +6,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
     // SHA فایل موجود
     const sha = '8b137891791fe96927ad78e64b0aad7bded08bdc';
     
-    const response = await fetch('https://raw.githubusercontent.com/davudsedft/admin/refs/heads/main/textfile.txt', {
+    const response = await fetch('https://api.github.com/repos/davudsedft/admin/contents/textfile.txt', {
         method: 'PUT',
         headers: {
             'Authorization': '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',
