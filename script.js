@@ -12,7 +12,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
 
         
         headers: {
-            'Authorization': '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',
+            'Authorization': 'token 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',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
