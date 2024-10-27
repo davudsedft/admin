@@ -14,7 +14,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
         },
         body: JSON.stringify({
             message: 'Updating text file',
-            content: btoa(text),
+            content: btoa(unescape(encodeURIComponent(text))),
             sha: sha
         })
     });
