@@ -9,7 +9,7 @@ document.getElementById('textForm').addEventListener('submit', async function(ev
     const response = await fetch('https://api.github.com/repos/davudsedft/admin/contents/textfile.txt', {
         method: 'PUT',
         headers: {
-            'Authorization': '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',
+            'Authorization': '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',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
