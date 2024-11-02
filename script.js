@@ -1,14 +1,26 @@
+// ذخیره توکن و نمایش فرم بروزرسانی
+document.getElementById('setTokenForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    const token = document.getElementById('githubToken').value;
+    localStorage.setItem('githubToken', token);
+
+    document.getElementById('setTokenForm').style.display = 'none';
+    document.getElementById('updateForm').style.display = 'block';
+});
+
+// بروزرسانی فایل در گیت‌هاب
 document.getElementById('updateForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-   const content = document.getElementById('content').value;
+    const content = document.getElementById('content').value;
     const owner = 'davudsedft';
     const repo = 'admin';
     const path = 'textfile.txt';
-    const token = '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';
+    const token = localStorage.getItem('githubToken');
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
     try {
         const response = await fetch(apiUrl, {
             headers: {
@@ -44,7 +56,3 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         document.getElementById('message').textContent = 'خطا: ' + error.message;
     }
 });
-
-
-
-
