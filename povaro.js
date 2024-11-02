@@ -1,4 +1,4 @@
-document.getElementById('updateForm2').addEventListener('submit2', async function(event) {
+document.getElementById('updateForm2').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const token = document.getElementById('githubToken').value;
