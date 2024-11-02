@@ -1,7 +1,7 @@
 document.getElementById('updateForm2').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const token = document.getElementById('githubToken').value;
+    const token = document.getElementById('githubToken2').value;
     const content = document.getElementById('content2').value;
     const owner = 'davudsedft';
     const repo = 'purvpn'; // نام ریپوزیتوری عمومی
