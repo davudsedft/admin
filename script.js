@@ -1,11 +1,11 @@
 document.getElementById('updateForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const content = document.getElementById('content').value;
+  const content = document.getElementById('content').value;
     const owner = 'davudsedft';
     const repo = 'admin';
     const path = 'textfile.txt';
-    const token = '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';
+    const token = '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';توکن درستت رو اینجا وارد کن
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
@@ -37,9 +37,17 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         if (updateResponse.ok) {
             document.getElementById('message').textContent = 'فایل با موفقیت بروز شد!';
         } else {
-            document.getElementById('message').textContent = 'خطایی رخ داده است.';
+            const errorData = await updateResponse.json();
+            document.getElementById('message').textContent = 'خطایی رخ داده است: ' + errorData.message;
         }
     } catch (error) {
         document.getElementById('message').textContent = 'خطا: ' + error.message;
     }
 });
+
+
+
+
+
+
+
