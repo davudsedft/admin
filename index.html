@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update GitHub File</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>بروز کردن فایل تکست</h1>
-        <form id="updateForm">
-            <textarea id="content" rows="10" cols="30" placeholder="متن جدید را وارد کنید"></textarea>
-            <button type="submit">بروز کن</button>
-        </form>
-        <div id="message"></div>
-    </div>
-    <script src="script.js"></script>
+    <h1>بروز کردن فایل تکست</h1>
+    <form action="update.php" method="post">
+        <textarea name="content" rows="10" cols="30" placeholder="متن جدید را وارد کنید"></textarea>
+        <button type="submit">بروز کن</button>
+    </form>
 </body>
 </html>
