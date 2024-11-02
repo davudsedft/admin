@@ -1,8 +1,8 @@
-document.getElementById('updateForm2').addEventListener('submit', async function(event) {
+document.getElementById('updateForm2').addEventListener('submit2', async function(event) {
     event.preventDefault();
 
     const token = document.getElementById('githubToken').value;
-    const content = document.getElementById('content').value;
+    const content = document.getElementById('content2').value;
     const owner = 'davudsedft';
     const repo = 'purvpn'; // نام ریپوزیتوری عمومی
     const path = 'link/t.test'; // مسیر فایل تکست
@@ -18,7 +18,7 @@ document.getElementById('updateForm2').addEventListener('submit', async function
         });
         const fileData = await response.json();
 
-        const updatedContent = btoa(unescape(encodeURIComponent(content))); // تبدیل متن به Base64
+        const updatedContent = btoa(unescape(encodeURIComponent(content2))); // تبدیل متن به Base64
 
         const updateResponse = await fetch(apiUrl, {
             method: 'PUT',
@@ -35,12 +35,12 @@ document.getElementById('updateForm2').addEventListener('submit', async function
         });
 
         if (updateResponse.ok) {
-            document.getElementById('message').textContent = 'فایل با موفقیت بروز شد!';
+            document.getElementById('message2').textContent = 'فایل با موفقیت بروز شد!';
         } else {
             const errorData = await updateResponse.json();
-            document.getElementById('message').textContent = 'خطایی رخ داده است: ' + errorData.message;
+            document.getElementById('message2').textContent = 'خطایی رخ داده است: ' + errorData.message;
         }
     } catch (error) {
-        document.getElementById('message').textContent = 'خطا: ' + error.message;
+        document.getElementById('message2').textContent = 'خطا: ' + error.message;
     }
 });
