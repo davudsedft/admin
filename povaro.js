@@ -5,7 +5,7 @@ document.getElementById('updateForm2').addEventListener('submit', async function
     const content = document.getElementById('content2').value;
     const owner = 'davudsedft';
     const repo = 'purvpn'; // نام ریپوزیتوری عمومی
-    const path = 'link/t.test'; // مسیر فایل تکست
+    const path = 'link/t.txt'; // مسیر فایل تکست
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
