@@ -16,6 +16,11 @@ document.getElementById('updateForm').addEventListener('submit', async function(
                 'Accept': 'application/vnd.github.v3+json'
             }
         });
+
+        if (!response.ok) {
+            throw new Error('خطا در دریافت فایل: ' + response.statusText);
+        }
+
         const fileData = await response.json();
 
         const updatedContent = btoa(unescape(encodeURIComponent(content))); // تبدیل متن به Base64
@@ -45,6 +50,6 @@ document.getElementById('updateForm').addEventListener('submit', async function(
             document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ` + errorData.message;
         }
     } catch (error) {
-        document.getElementById('message').textContent = `خطا در ${filePath}: ` + error.message;
+        document.getElementById('message').textContent = `خطا: ` + error.message;
     }
 });
