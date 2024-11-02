@@ -5,7 +5,7 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     const content = document.getElementById('content').value;
     const owner = 'davudsedft';
     const repo = 'newpurnet'; // نام ریپوزیتوری عمومی
-    const path = 'textfile.txt'; // مسیر فایل تکست
+    const path = 'test.txt'; // مسیر فایل تکست
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
