@@ -9,7 +9,11 @@
 <body>
     <div class="container">
         <h1>بروز کردن فایل تکست</h1>
-        <form id="updateForm">
+        <form id="setTokenForm">
+            <input type="text" id="githubToken" placeholder="توکن گیت‌هاب خود را وارد کنید" />
+            <button type="submit">ذخیره توکن</button>
+        </form>
+        <form id="updateForm" style="display:none;">
             <textarea id="content" rows="10" cols="30" placeholder="متن جدید را وارد کنید"></textarea>
             <button type="submit">بروز کن</button>
         </form>
