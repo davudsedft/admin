@@ -1,23 +1,11 @@
-// ذخیره توکن و نمایش فرم بروزرسانی
-document.getElementById('setTokenForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const token = document.getElementById('githubToken').value;
-    localStorage.setItem('githubToken', token);
-
-    document.getElementById('setTokenForm').style.display = 'none';
-    document.getElementById('updateForm').style.display = 'block';
-});
-
-// بروزرسانی فایل در گیت‌هاب
 document.getElementById('updateForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
+    const token = document.getElementById('githubToken').value;
     const content = document.getElementById('content').value;
     const owner = 'davudsedft';
-    const repo = 'newpurnet';
-    const path = 'test.txt';
-    const token = localStorage.getItem('githubToken');
+    const repo = 'newpurnet'; // نام ریپوزیتوری عمومی
+    const path = 'textfile.txt'; // مسیر فایل تکست
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
