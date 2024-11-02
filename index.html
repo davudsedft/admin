@@ -61,21 +61,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>بروز کردن فایل‌های تکست</h1>
-        <form class="updateForm" data-file="a.txt">
-            <textarea rows="4" placeholder="متن جدید برای a.txt"></textarea>
-            <input type="text" placeholder="توکن گیت‌هاب خود را وارد کنید" />
-            <button type="submit">بروز کردن a.txt</button>
-        </form>
-        <form class="updateForm" data-file="b.txt">
-            <textarea rows="4" placeholder="متن جدید برای b.txt"></textarea>
-            <input type="text" placeholder="توکن گیت‌هاب خود را وارد کنید" />
-            <button type="submit">بروز کردن b.txt</button>
-        </form>
-        <form class="updateForm" data-file="c.txt">
-            <textarea rows="4" placeholder="متن جدید برای c.txt"></textarea>
-            <input type="text" placeholder="توکن گیت‌هاب خود را وارد کنید" />
-            <button type="submit">بروز کردن c.txt</button>
+        <h1>بروز کردن فایل تکست</h1>
+        <form id="updateForm">
+            <input type="text" id="repoName" placeholder="نام ریپوزیتوری خود را وارد کنید" />
+            <input type="text" id="filePath" placeholder="آدرس فایل (مثال: textfile.txt)" />
+            <textarea id="content" rows="4" placeholder="متن جدید را وارد کنید"></textarea>
+            <input type="text" id="githubToken" placeholder="توکن گیت‌هاب خود را وارد کنید" />
+            <button type="submit">بروز کن</button>
         </form>
         <div id="message"></div>
     </div>
