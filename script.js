@@ -15,7 +15,7 @@ document.getElementById('updateForm').addEventListener('submit', async function(
 
     const content = document.getElementById('content').value;
     const owner = 'davudsedft';
-    const repo = 'admin';
+    const repo = 'newpurnet';
     const path = 'textfile.txt';
     const token = localStorage.getItem('githubToken');
 
