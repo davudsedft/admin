@@ -3,11 +3,11 @@ document.getElementById('updateForm').addEventListener('submit', async function(
 
     const customRepoName = document.getElementById('customRepoName').value.trim();
     const selectedRepoName = document.getElementById('repoName').value;
-    const repoName = customRepoName || selectedRepoName; // استفاده از مقدار ورودی کاربر یا پیشفرض
+    const repoName = customRepoName || selectedRepoName;
 
     const customFilePath = document.getElementById('customFilePath').value.trim();
     const selectedFilePath = document.getElementById('filePath').value;
-    const filePath = customFilePath || selectedFilePath; // استفاده از مقدار ورودی کاربر یا پیشفرض
+    const filePath = customFilePath || selectedFilePath;
 
     if (!repoName) {
         document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری معتبر وارد کنید.';
@@ -49,27 +49,3 @@ document.getElementById('updateForm').addEventListener('submit', async function(
             method: 'PUT',
             headers: {
                 'Authorization': `token ${token}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: `Updating ${filePath} via web form`,
-                content: updatedContent,
-                sha: fileData.sha
-            })
-        });
-
-        if (updateResponse.ok) {
-            document.getElementById('message').textContent = `${filePath} با موفقیت بروز شد!`;
-            setTimeout(() => {
-                window.location.href = window.location.href;
-            }, 2000);
-        } else {
-            const errorData = await updateResponse.json();
-            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ` + errorData.message;
-        }
-    } catch (error) {
-        document.getElementById('message').textContent = `خطا: ` + error.message;
-        console.error('Error:', error);
-    }
-});
