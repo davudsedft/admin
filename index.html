@@ -28,7 +28,7 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
-        textarea, input[type="text"] {
+        textarea, input[type="text"], select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -53,7 +53,7 @@
             h1 {
                 font-size: 20px;
             }
-            textarea, input[type="text"], button {
+            textarea, input[type="text"], select, button {
                 font-size: 14px;
             }
         }
@@ -63,8 +63,19 @@
     <div class="container">
         <h1>بروزرسانی</h1>
         <form id="updateForm">
-            <input type="text" id="repoName" placeholder="نام ریپوزیتوری خود را وارد کنید" />
-            <input type="text" id="filePath" placeholder="آدرس فایل (مثال: links/t.txt)" />
+            <select id="repoName">
+                <option value="purvpn">purvpn</option>
+                <option value="purlite">purlite</option>
+                <option value="newpurnet">newpurnet</option>
+                <option value="purwin">purwin</option>
+                <option value="" selected>نام ریپوزیتوری خود را وارد کنید</option>
+            </select>
+            <select id="filePath">
+                <option value="messwin.txt">messwin.txt</option>
+                <option value="ver.txt">ver.txt</option>
+                <option value="links/lite.txt">links/lite.txt</option>
+                <option value="" selected>آدرس فایل (مثال: links/t.txt)</option>
+            </select>
             <textarea id="content" rows="4" placeholder="متن جدید را وارد کنید"></textarea>
             <input type="text" id="githubToken" placeholder="پسورد" />
             <button type="submit">بروز کن</button>
