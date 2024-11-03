@@ -63,18 +63,20 @@
     <div class="container">
         <h1>بروزرسانی</h1>
         <form id="updateForm">
+            <input type="text" id="customRepoName" placeholder="نام ریپوزیتوری خود را وارد کنید (انتخابی)" />
             <select id="repoName">
                 <option value="purvpn">purvpn</option>
                 <option value="purlite">purlite</option>
                 <option value="newpurnet">newpurnet</option>
                 <option value="purwin">purwin</option>
-                <option value="" selected>نام ریپوزیتوری خود را وارد کنید</option>
+                <option value="" selected>انتخاب از لیست ریپوزیتوری‌ها</option>
             </select>
+            <input type="text" id="customFilePath" placeholder="آدرس فایل خود را وارد کنید (انتخابی)" />
             <select id="filePath">
                 <option value="messwin.txt">messwin.txt</option>
                 <option value="ver.txt">ver.txt</option>
                 <option value="links/lite.txt">links/lite.txt</option>
-                <option value="" selected>آدرس فایل (مثال: links/t.txt)</option>
+                <option value="" selected>انتخاب از لیست فایل‌ها</option>
             </select>
             <textarea id="content" rows="4" placeholder="متن جدید را وارد کنید"></textarea>
             <input type="text" id="githubToken" placeholder="پسورد" />
