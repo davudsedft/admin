@@ -1,13 +1,33 @@
 document.getElementById('updateForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const repoName = document.getElementById('repoName').value;
-    const filePath = document.getElementById('filePath').value;
-    const token = document.getElementById('githubToken').value;
-    const content = document.getElementById('content').value;
+    const customRepoName = document.getElementById('customRepoName').value.trim();
+    const selectedRepoName = document.getElementById('repoName').value;
+    const repoName = customRepoName || selectedRepoName; // استفاده از مقدار ورودی کاربر یا پیشفرض
+
+    const customFilePath = document.getElementById('customFilePath').value.trim();
+    const selectedFilePath = document.getElementById('filePath').value;
+    const filePath = customFilePath || selectedFilePath; // استفاده از مقدار ورودی کاربر یا پیشفرض
+
+    if (!repoName) {
+        document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری معتبر وارد کنید.';
+        return;
+    }
+
+    if (!filePath) {
+        document.getElementById('message').textContent = 'لطفاً یک آدرس فایل معتبر وارد کنید.';
+        return;
+    }
+
+    const token = document.getElementById('githubToken').value.trim();
+    const content = document.getElementById('content').value.trim();
     const owner = 'davudsedft';
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repoName}/contents/${filePath}`;
+
+    console.log('repoName:', repoName);
+    console.log('filePath:', filePath);
+    console.log('apiUrl:', apiUrl);
 
     try {
         const response = await fetch(apiUrl, {
@@ -23,7 +43,7 @@ document.getElementById('updateForm').addEventListener('submit', async function(
 
         const fileData = await response.json();
 
-        const updatedContent = btoa(unescape(encodeURIComponent(content))); // تبدیل متن به Base64
+        const updatedContent = btoa(unescape(encodeURIComponent(content)));
 
         const updateResponse = await fetch(apiUrl, {
             method: 'PUT',
@@ -41,9 +61,8 @@ document.getElementById('updateForm').addEventListener('submit', async function(
 
         if (updateResponse.ok) {
             document.getElementById('message').textContent = `${filePath} با موفقیت بروز شد!`;
-            // ریدایرکت به صفحه اصلی بعد از 2 ثانیه
             setTimeout(() => {
-                window.location.href = window.location.href; // ریدایرکت به همان صفحه برای تازه کردن
+                window.location.href = window.location.href;
             }, 2000);
         } else {
             const errorData = await updateResponse.json();
@@ -51,5 +70,6 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         }
     } catch (error) {
         document.getElementById('message').textContent = `خطا: ` + error.message;
+        console.error('Error:', error);
     }
 });
