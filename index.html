@@ -49,6 +49,12 @@
         button:hover {
             background-color: #218838;
         }
+        .delete-button {
+            background-color: #dc3545;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
         @media (max-width: 600px) {
             h1 {
                 font-size: 20px;
@@ -92,6 +98,7 @@
             <input type="text" id="githubToken" placeholder="پسورد" />
             <button type="submit">بروز کن</button>
         </form>
+        <button id="deleteButton" class="delete-button">حذف محتویات</button>
         <div id="message"></div>
     </div>
     <script src="script.js"></script>
