@@ -2,11 +2,6 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     event.preventDefault();
 
     const githubUsername = document.getElementById('githubUsername').value.trim();
-    if (!githubUsername) {
-        document.getElementById('message').textContent = 'لطفاً نام کاربری GitHub خود را وارد کنید.';
-        return;
-    }
-
     const customRepoName = document.getElementById('customRepoName').value.trim();
     const selectedRepoName = document.getElementById('repoName').value;
     const repoName = customRepoName || selectedRepoName;
@@ -15,23 +10,27 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     const selectedFilePath = document.getElementById('filePath').value;
     const filePath = customFilePath || selectedFilePath;
 
-    if (!repoName || !filePath) {
-        document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری و فایل معتبر وارد کنید.';
+    if (!githubUsername) {
+        document.getElementById('message').textContent = 'لطفاً نام کاربری GitHub خود را وارد کنید.';
+        return;
+    }
+
+    if (!repoName) {
+        document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری معتبر وارد کنید.';
+        return;
+    }
+
+    if (!filePath) {
+        document.getElementById('message').textContent = 'لطفاً یک آدرس فایل معتبر وارد کنید.';
         return;
     }
 
     const token = document.getElementById('githubToken').value.trim();
     const content = document.getElementById('content').value.trim();
-
-    if (!token) {
-        document.getElementById('message').textContent = 'لطفاً توکن GitHub خود را وارد کنید.';
-        return;
-    }
-
     const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}`;
 
     try {
-        // ابتدا فایل را می‌خوانیم تا SHA آن را دریافت کنیم
+        // خواندن محتوای فایل
         const response = await fetch(apiUrl, {
             headers: {
                 'Authorization': `token ${token}`,
@@ -40,17 +39,16 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            document.getElementById('message').textContent = `خطا در دریافت فایل: ${errorData.message}`;
-            return;
+            throw new Error('خطا در دریافت فایل: ' + response.statusText);
         }
 
         const fileData = await response.json();
-        const sha = fileData.sha;
+        const fileContent = decodeURIComponent(escape(atob(fileData.content)));
+        document.getElementById('content').value = fileContent; // نمایش محتوا در textarea
 
         const updatedContent = btoa(unescape(encodeURIComponent(content)));
 
-        // ارسال درخواست PUT برای آپلود تغییرات به GitHub
+        // ارسال درخواست PUT برای بروز رسانی محتوا
         const updateResponse = await fetch(apiUrl, {
             method: 'PUT',
             headers: {
@@ -61,19 +59,60 @@ document.getElementById('updateForm').addEventListener('submit', async function(
             body: JSON.stringify({
                 message: `Updating ${filePath} via web form`,
                 content: updatedContent,
-                sha: sha
+                sha: fileData.sha
             })
         });
 
         if (updateResponse.ok) {
             document.getElementById('message').textContent = `${filePath} با موفقیت بروز شد!`;
             setTimeout(() => {
-                window.location.href = window.location.href; // رفرش صفحه بعد از آپلود موفق
+                window.location.href = window.location.href;
             }, 2000);
         } else {
             const errorData = await updateResponse.json();
-            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ${errorData.message}`;
+            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ` + errorData.message;
         }
+    } catch (error) {
+        document.getElementById('message').textContent = `خطا: ` + error.message;
+        console.error('Error:', error);
+    }
+});
+
+// بارگذاری محتوا در textarea زمانی که دکمه نمایش محتوا زده شود
+document.getElementById('loadContentButton').addEventListener('click', async function() {
+    const githubUsername = document.getElementById('githubUsername').value.trim();
+    const customRepoName = document.getElementById('customRepoName').value.trim();
+    const selectedRepoName = document.getElementById('repoName').value;
+    const repoName = customRepoName || selectedRepoName;
+
+    const customFilePath = document.getElementById('customFilePath').value.trim();
+    const selectedFilePath = document.getElementById('filePath').value;
+    const filePath = customFilePath || selectedFilePath;
+
+    const token = document.getElementById('githubToken').value.trim();
+
+    if (!githubUsername || !repoName || !filePath || !token) {
+        document.getElementById('message').textContent = 'لطفاً تمامی فیلدها را پر کنید.';
+        return;
+    }
+
+    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('خطا در دریافت فایل: ' + response.statusText);
+        }
+
+        const fileData = await response.json();
+        const fileContent = decodeURIComponent(escape(atob(fileData.content)));
+        document.getElementById('content').value = fileContent; // نمایش محتوا در textarea
     } catch (error) {
         document.getElementById('message').textContent = `خطا: ${error.message}`;
         console.error('Error:', error);
