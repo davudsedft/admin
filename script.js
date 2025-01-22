@@ -28,6 +28,12 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     const token = document.getElementById('githubToken').value.trim();
     const content = document.getElementById('content').value.trim();
     
+    // بررسی که اگر محتوای جدید خالی بود، پیغام مناسبی نشان داده شود
+    if (!content) {
+        document.getElementById('message').textContent = 'لطفاً محتوای جدیدی وارد کنید.';
+        return;
+    }
+
     const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}`;
 
     try {
