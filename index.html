@@ -68,51 +68,48 @@
                 <option value="davudsedft">davudsedft</option>
                 <option value="beevbeev">beevbeev</option>
             </select>
-            
+
             <!-- انتخاب ریپوزیتوری -->
-            <input type="text" id="customRepoName" placeholder="نام ریپوزیتوری خود را وارد کنید (انتخابی)" />
-            <select id="repoName">
-                <option value="" selected>انتخاب از لیست ریپوزیتوری‌ها</option>
-                <option value="purvpn">purvpn</option>
-                <option value="dozz">dozz</option>
-                <option value="purlite">purlite</option>
-                <option value="newpurnet">newpurnet</option>
-                <option value="purwin">purwin</option>
-            </select>
+            <input type="text" id="customRepoName" list="repoNames" placeholder="نام ریپوزیتوری خود را وارد کنید (انتخابی)" />
+            <datalist id="repoNames">
+                <option value="purvpn">
+                <option value="dozz">
+                <option value="purlite">
+                <option value="newpurnet">
+                <option value="purwin">
+            </datalist>
 
             <!-- انتخاب آدرس فایل -->
-            <input type="text" id="customFilePath" placeholder="آدرس فایل خود را وارد کنید (انتخابی)" />
-            <select id="filePath">
-                <option value="" selected>انتخاب از لیست فایل‌ها</option>
-                <option value="messwin.txt">messwin.txt</option>
-                <option value="ver.txt">ver.txt</option>
-                <option value="mix.txt">mix.txt</option>
-                <option value="purliite.txt">purliite.txt</option>
-                <option value="trojan.txt">trojan.txt</option>
-                <option value="shadowsocks.txt">shadowsocks.txt</option>
-                <option value="links/lite.txt">links/lite.txt</option>
-                <option value="links/wireguard.txt">links/wireguard.txt</option>
-                <option value="links/purkow.txt">links/purkow.txt</option>
-                <option value="links/newloop2.txt">links/newloop2.txt</option>
-                <option value="serwin.txt">serwin.txt</option>
-                <option value="purkow.txt">purkow.txt</option>
-                <option value="argopol.txt">argopol.txt</option>
-                <option value="falkonpol.txt">falkonpol.txt</option>
-                <option value="hamrahbot.txt">hamrahbot.txt</option>
-                <option value="iransellbot.txt">iransellbot.txt</option>
-                <option value="wireguardbot.txt">wireguardbot.txt</option>
-            </select>
+            <input type="text" id="customFilePath" list="filePaths" placeholder="آدرس فایل خود را وارد کنید (انتخابی)" />
+            <datalist id="filePaths">
+                <option value="messwin.txt">
+                <option value="ver.txt">
+                <option value="mix.txt">
+                <option value="purliite.txt">
+                <option value="trojan.txt">
+                <option value="shadowsocks.txt">
+                <option value="links/lite.txt">
+                <option value="links/wireguard.txt">
+                <option value="links/purkow.txt">
+                <option value="links/newloop2.txt">
+                <option value="serwin.txt">
+                <option value="purkow.txt">
+                <option value="argopol.txt">
+                <option value="falkonpol.txt">
+                <option value="hamrahbot.txt">
+                <option value="iransellbot.txt">
+                <option value="wireguardbot.txt">
+            </datalist>
 
             <!-- بخش محتوای جدید -->
             <textarea id="content" rows="4" placeholder="متن جدید را وارد کنید"></textarea>
 
             <!-- توکن GitHub -->
-            <input type="text" id="githubToken" placeholder="پسورد" />
+            <input type="text" id="githubToken" placeholder="توکن GitHub" />
 
             <!-- دکمه‌ها -->
             <button type="submit">بروز کن</button>
             <button type="button" id="loadContentButton">نمایش محتوا</button>
-
         </form>
         <div id="message"></div>
     </div>
