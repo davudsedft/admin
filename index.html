@@ -63,13 +63,7 @@
     <div class="container">
         <h1>بروزرسانی</h1>
         <form id="updateForm">
-            <!-- بخش وارد کردن نام کاربری GitHub -->
-            <select id="githubUsername">
-                <option value="davudsedft">davudsedft</option>
-                <option value="beevbeev">beevbeev</option>
-            </select>
-            
-            <!-- انتخاب ریپوزیتوری -->
+            <input type="text" id="githubUsername" placeholder="نام کاربری GitHub خود را وارد کنید" />
             <input type="text" id="customRepoName" placeholder="نام ریپوزیتوری خود را وارد کنید (انتخابی)" />
             <select id="repoName">
                 <option value="" selected>انتخاب از لیست ریپوزیتوری‌ها</option>
@@ -78,8 +72,6 @@
                 <option value="newpurnet">newpurnet</option>
                 <option value="purwin">purwin</option>
             </select>
-
-            <!-- انتخاب آدرس فایل -->
             <input type="text" id="customFilePath" placeholder="آدرس فایل خود را وارد کنید (انتخابی)" />
             <select id="filePath">
                 <option value="" selected>انتخاب از لیست فایل‌ها</option>
@@ -97,17 +89,10 @@
                 <option value="iransellbot.txt">iransellbot.txt</option>
                 <option value="wireguardbot.txt">wireguardbot.txt</option>
             </select>
-
-            <!-- بخش محتوای جدید -->
             <textarea id="content" rows="4" placeholder="متن جدید را وارد کنید"></textarea>
-
-            <!-- توکن GitHub -->
-            <input type="text" id="githubToken" placeholder="پسورد" />
-
-            <!-- دکمه‌ها -->
+            <input type="text" id="githubToken" placeholder="توکن GitHub" />
             <button type="submit">بروز کن</button>
             <button type="button" id="loadContentButton">نمایش محتوا</button>
-
         </form>
         <div id="message"></div>
     </div>
