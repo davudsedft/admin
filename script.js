@@ -40,7 +40,7 @@ document.getElementById('loadContentButton').addEventListener('click', async fun
         
         // محاسبه تعداد خطوط و نمایش هشدار
         const lineCount = decodedContent.split('\n').length;
-        alert(`تعداد خطوط موجود در فایل: ${lineCount}`);
+        alert(`تعداد: ${lineCount}`);
     } catch (error) {
         document.getElementById('message').textContent = `خطا: ${error.message}`;
         console.error('Error:', error);
