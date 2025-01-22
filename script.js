@@ -9,28 +9,22 @@ document.getElementById('updateForm').addEventListener('submit', async function(
 
     const customRepoName = document.getElementById('customRepoName').value.trim();
     const selectedRepoName = document.getElementById('repoName').value;
-    const repoName = customRepoName || selectedRepoName; // استفاده از مقدار ورودی کاربر یا پیشفرض
+    const repoName = customRepoName || selectedRepoName;
 
     const customFilePath = document.getElementById('customFilePath').value.trim();
     const selectedFilePath = document.getElementById('filePath').value;
-    const filePath = customFilePath || selectedFilePath; // استفاده از مقدار ورودی کاربر یا پیشفرض
+    const filePath = customFilePath || selectedFilePath;
 
-    if (!repoName) {
-        document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری معتبر وارد کنید.';
-        return;
-    }
-
-    if (!filePath) {
-        document.getElementById('message').textContent = 'لطفاً یک آدرس فایل معتبر وارد کنید.';
+    if (!repoName || !filePath) {
+        document.getElementById('message').textContent = 'لطفاً یک نام ریپوزیتوری و فایل معتبر وارد کنید.';
         return;
     }
 
     const token = document.getElementById('githubToken').value.trim();
     const content = document.getElementById('content').value.trim();
-    
-    // بررسی که اگر محتوای جدید خالی بود، پیغام مناسبی نشان داده شود
-    if (!content) {
-        document.getElementById('message').textContent = 'لطفاً محتوای جدیدی وارد کنید.';
+
+    if (!token) {
+        document.getElementById('message').textContent = 'لطفاً توکن GitHub خود را وارد کنید.';
         return;
     }
 
@@ -46,13 +40,15 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         });
 
         if (!response.ok) {
-            throw new Error('خطا در دریافت فایل: ' + response.statusText);
+            const errorData = await response.json();
+            document.getElementById('message').textContent = `خطا در دریافت فایل: ${errorData.message}`;
+            return;
         }
 
         const fileData = await response.json();
-        const sha = fileData.sha;  // دریافت SHA فایل
-        
-        const updatedContent = btoa(unescape(encodeURIComponent(content))); // محتوای جدید را Base64 encode می‌کنیم
+        const sha = fileData.sha;
+
+        const updatedContent = btoa(unescape(encodeURIComponent(content)));
 
         // ارسال درخواست PUT برای آپلود تغییرات به GitHub
         const updateResponse = await fetch(apiUrl, {
@@ -63,9 +59,9 @@ document.getElementById('updateForm').addEventListener('submit', async function(
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                message: `Updating ${filePath} via web form`, // پیام commit
-                content: updatedContent,  // محتوای جدید فایل به صورت Base64
-                sha: sha  // SHA قبلی فایل برای جلوگیری از تغییرات غیرمنتظره
+                message: `Updating ${filePath} via web form`,
+                content: updatedContent,
+                sha: sha
             })
         });
 
@@ -76,10 +72,10 @@ document.getElementById('updateForm').addEventListener('submit', async function(
             }, 2000);
         } else {
             const errorData = await updateResponse.json();
-            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ` + errorData.message;
+            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ${errorData.message}`;
         }
     } catch (error) {
-        document.getElementById('message').textContent = `خطا: ` + error.message;
+        document.getElementById('message').textContent = `خطا: ${error.message}`;
         console.error('Error:', error);
     }
 });
