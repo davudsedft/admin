@@ -1,4 +1,10 @@
 document.getElementById('loadContentButton').addEventListener('click', async function () {
+    const githubUsername = document.getElementById('githubUsername').value.trim();
+    if (!githubUsername) {
+        document.getElementById('message').textContent = 'لطفاً نام کاربری GitHub خود را وارد کنید.';
+        return;
+    }
+
     const customRepoName = document.getElementById('customRepoName').value.trim();
     const selectedRepoName = document.getElementById('repoName').value;
     const repoName = customRepoName || selectedRepoName; // استفاده از مقدار ورودی کاربر یا پیشفرض
@@ -18,9 +24,8 @@ document.getElementById('loadContentButton').addEventListener('click', async fun
     }
 
     const token = document.getElementById('githubToken').value.trim();
-    const owner = 'davudsedft';
 
-    const apiUrl = `https://api.github.com/repos/${owner}/${repoName}/contents/${filePath}`;
+    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${filePath}`;
 
     try {
         const response = await fetch(apiUrl, {
