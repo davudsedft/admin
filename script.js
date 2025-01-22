@@ -1,6 +1,4 @@
-document.getElementById('updateForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-
+document.getElementById('loadContentButton').addEventListener('click', async function () {
     const customRepoName = document.getElementById('customRepoName').value.trim();
     const selectedRepoName = document.getElementById('repoName').value;
     const repoName = customRepoName || selectedRepoName; // استفاده از مقدار ورودی کاربر یا پیشفرض
@@ -20,14 +18,9 @@ document.getElementById('updateForm').addEventListener('submit', async function(
     }
 
     const token = document.getElementById('githubToken').value.trim();
-    const content = document.getElementById('content').value.trim();
     const owner = 'davudsedft';
 
     const apiUrl = `https://api.github.com/repos/${owner}/${repoName}/contents/${filePath}`;
-
-    console.log('repoName:', repoName);
-    console.log('filePath:', filePath);
-    console.log('apiUrl:', apiUrl);
 
     try {
         const response = await fetch(apiUrl, {
@@ -42,32 +35,10 @@ document.getElementById('updateForm').addEventListener('submit', async function(
         }
 
         const fileData = await response.json();
+        const fileContent = decodeURIComponent(escape(atob(fileData.content))); // Decode base64
 
-        const updatedContent = btoa(unescape(encodeURIComponent(content)));
-
-        const updateResponse = await fetch(apiUrl, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${token}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: `Updating ${filePath} via web form`,
-                content: updatedContent,
-                sha: fileData.sha
-            })
-        });
-
-        if (updateResponse.ok) {
-            document.getElementById('message').textContent = `${filePath} با موفقیت بروز شد!`;
-            setTimeout(() => {
-                window.location.href = window.location.href;
-            }, 2000);
-        } else {
-            const errorData = await updateResponse.json();
-            document.getElementById('message').textContent = `خطایی رخ داده است در ${filePath}: ` + errorData.message;
-        }
+        document.getElementById('content').value = fileContent; // نمایش محتوای فایل در textarea
+        document.getElementById('message').textContent = `${filePath} با موفقیت بارگذاری شد.`;
     } catch (error) {
         document.getElementById('message').textContent = `خطا: ` + error.message;
         console.error('Error:', error);
