@@ -8,28 +8,31 @@ body {
 
 h1 {
     color: #333;
+    font-size: 14px; /* کاهش اندازه فونت */
+    margin-bottom: 10px;
 }
 
 form {
-    margin-top: 20px;
+    margin-top: 10px; /* کاهش فاصله بالای فرم */
 }
 
 textarea {
-    width: 300px;
-    height: 100px;
-    padding: 10px;
-    border-radius: 5px;
+    width: 250px; /* کاهش عرض */
+    height: 80px; /* کاهش ارتفاع */
+    padding: 8px; /* کاهش padding */
+    border-radius: 4px; /* کمی گردتر شدن گوشه‌ها */
     border: 1px solid #ccc;
+    font-size: 12px; /* کاهش اندازه فونت */
 }
 
 button {
-    margin-top: 10px;
-    padding: 10px 20px;
+    margin-top: 8px; /* کاهش فاصله بالای دکمه */
+    padding: 8px 16px; /* کاهش padding */
     border: none;
-    border-radius: 5px;
+    border-radius: 4px; /* کمی گردتر شدن گوشه‌ها */
     background-color: #333;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px; /* کاهش اندازه فونت */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -39,6 +42,7 @@ button:hover {
 }
 
 #response {
-    margin-top: 20px;
+    margin-top: 15px; /* کاهش فاصله بالا */
     color: #008000;
+    font-size: 12px; /* کاهش اندازه فونت */
 }
